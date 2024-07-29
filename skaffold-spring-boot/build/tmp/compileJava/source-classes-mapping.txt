@@ -1,0 +1,4 @@
+com/peterica/skaffoldspringboot/SkaffoldSpringBootApplication.java
+ com.peterica.skaffoldspringboot.SkaffoldSpringBootApplication
+com/peterica/skaffoldspringboot/HelloWorldController.java
+ com.peterica.skaffoldspringboot.HelloWorldController

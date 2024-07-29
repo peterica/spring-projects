@@ -1,0 +1,9 @@
+com/peterica/skaffoldspringboot/SkaffoldSpringBootApplicationTests.java
+ com.peterica.skaffoldspringboot.SkaffoldSpringBootApplicationTests
+com/peterica/skaffoldspringboot/Car.java
+ com.peterica.skaffoldspringboot.Car
+com/peterica/skaffoldspringboot/Vehicle.java
+ com.peterica.skaffoldspringboot.Vehicle
+com/peterica/skaffoldspringboot/good.java
+ com.peterica.skaffoldspringboot.Book
+ com.peterica.skaffoldspringboot.good
