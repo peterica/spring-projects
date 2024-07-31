@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: kotlin-elasticsearch
+  elasticsearch:
+    rest:
+      uris: http://localhost:9200
+

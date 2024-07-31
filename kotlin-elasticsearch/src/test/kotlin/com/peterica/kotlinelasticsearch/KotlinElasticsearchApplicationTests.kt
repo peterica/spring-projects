@@ -10,4 +10,6 @@ class KotlinElasticsearchApplicationTests {
     fun contextLoads() {
     }
 
+
+
 }
