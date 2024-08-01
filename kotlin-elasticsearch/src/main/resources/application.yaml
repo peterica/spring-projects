@@ -3,5 +3,12 @@ spring:
     name: kotlin-elasticsearch
   elasticsearch:
     rest:
-      uris: http://localhost:9200
-
+      url: 192.168.33.24:9200
+      api_key: _YWoL60_SKeJdRbOoasAhg
+      username: elastic
+      password: f-XHpRfq=L*LE6Q9*MZH
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.33.24:3308/playground?characterEncoding=UTF-8
+    username: root
+    password: strong-password
