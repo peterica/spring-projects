@@ -13,7 +13,6 @@ import java.time.LocalDateTime
 
 @SpringBootTest
 class KotlinQuerydslApplicationTests {
-
     @Autowired
     private lateinit var productRepository: ProductRepository
 
@@ -23,7 +22,6 @@ class KotlinQuerydslApplicationTests {
     @Test
     fun contextLoads() {
     }
-
 
     @DisplayName("1개월 내로 등록된 Product 중 수량이 적은 5개 찾기")
     @Test
@@ -51,17 +49,18 @@ class KotlinQuerydslApplicationTests {
     }
 
     private fun setUpTestData() {
-        val products = listOf(
-            Product("Apple", 1, LocalDateTime.now()),
-            Product("Banana", 3, LocalDateTime.now().minusDays(1)),
-            Product("Cap", 4, LocalDateTime.now().minusDays(15)),
-            Product("Dragon Fruit", 5, LocalDateTime.now().minusDays(20)),
-            Product("Egg", 7, LocalDateTime.now().minusDays(24)),
-            Product("Fish and Chips", 8, LocalDateTime.now().minusDays(26)),
-            Product("Ginger", 3, LocalDateTime.now().minusDays(28)),
-            Product("Ham", 5, LocalDateTime.now().minusDays(33)),
-            Product("Ice", 6, LocalDateTime.now().minusDays(46)),
-        )
+        val products =
+            listOf(
+                Product("Apple", 1, LocalDateTime.now()),
+                Product("Banana", 3, LocalDateTime.now().minusDays(1)),
+                Product("Cap", 4, LocalDateTime.now().minusDays(15)),
+                Product("Dragon Fruit", 5, LocalDateTime.now().minusDays(20)),
+                Product("Egg", 7, LocalDateTime.now().minusDays(24)),
+                Product("Fish and Chips", 8, LocalDateTime.now().minusDays(26)),
+                Product("Ginger", 3, LocalDateTime.now().minusDays(28)),
+                Product("Ham", 5, LocalDateTime.now().minusDays(33)),
+                Product("Ice", 6, LocalDateTime.now().minusDays(46)),
+            )
         productRepository.saveAll(products)
     }
 }
