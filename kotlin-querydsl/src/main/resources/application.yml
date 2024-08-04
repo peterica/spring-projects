@@ -2,7 +2,7 @@ spring:
   application:
     name: kotlin-querydsl
   datasource:
-    url: jdbc:mysql://peterica.iptime.org:3308/playground
+    url: jdbc:mysql://192.168.33.24:3308/playground
     username: root
     password: strong-password
   jpa:
