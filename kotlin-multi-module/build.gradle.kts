@@ -1,52 +1,70 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("java")
-    id("org.springframework.boot") version "3.2.5" apply false
-    id("io.spring.dependency-management") version "1.1.4" apply false
-    id("org.hibernate.orm") version "6.4.9.Final"
-
-    kotlin("jvm") version "1.9.23" apply(false)
-    kotlin("plugin.jpa") version "1.9.23"
-    kotlin("plugin.spring") version "1.9.23"
-    kotlin("kapt") version "1.9.23"
+    kotlin("jvm")
+    kotlin("kapt")
+    kotlin("plugin.spring") apply false
+    kotlin("plugin.jpa") apply false
+    id("org.springframework.boot") apply false
+    id("io.spring.dependency-management")
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
-group = "com.peterica"
-version = "0.0.1-SNAPSHOT"
+val javaVersion: String by project
+val projectGroup: String by project
+val applicationVersion: String by project
+java.sourceCompatibility = JavaVersion.valueOf("VERSION_$javaVersion")
 
-configure(allprojects) {
+allprojects {
+    group = projectGroup
+    version = applicationVersion
+
     repositories {
         mavenCentral()
+        maven(url = "https://repo.spring.io/milestone")
     }
 }
 
-configure(subprojects) {
-    apply {
-        plugin("org.springframework.boot")
-        plugin("kotlin")
-        println("java")
-        plugin("io.spring.dependency-management")
+subprojects {
+    apply(plugin = "org.jetbrains.kotlin.jvm")
+    apply(plugin = "org.jetbrains.kotlin.kapt")
+    apply(plugin = "org.jetbrains.kotlin.plugin.spring")
+    apply(plugin = "org.jetbrains.kotlin.plugin.jpa")
+    apply(plugin = "org.jetbrains.kotlin.plugin.noarg")
+    apply(plugin = "org.springframework.boot")
+    apply(plugin = "io.spring.dependency-management")
+
+    dependencyManagement {
+        val springCloudDependenciesVersion: String by project
+        imports {
+            mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springCloudDependenciesVersion")
+        }
     }
 
     dependencies {
-        implementation("org.springframework.boot:spring-boot-starter")
-        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
-
-        runtimeOnly("com.mysql:mysql-connector-j")
-
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
         testImplementation("org.springframework.boot:spring-boot-starter-test")
-        testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-        testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
+        testImplementation("io.kotest:kotest-runner-junit5:5.4.2")
+        testImplementation("io.kotest:kotest-assertions-core:5.4.2")
+        testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.2")
         annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+        kapt("org.springframework.boot:spring-boot-configuration-processor")
+    }
+
+    tasks.getByName("bootJar") {
+        enabled = false
+    }
+
+    tasks.getByName("jar") {
+        enabled = true
     }
 
     tasks.withType<KotlinCompile> {
         kotlinOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
-            jvmTarget = "17"
+            jvmTarget = javaVersion
         }
     }
 
