@@ -1,5 +1,7 @@
 dependencies {
+    compileOnly(project(":common"))
     compileOnly(project(":domain"))
+
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
